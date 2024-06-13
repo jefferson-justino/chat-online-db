@@ -12,6 +12,7 @@ dentro do terminal:
 - instalar express;
 - instalar cors.
 
+
 adicionar no package.json:
 "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
