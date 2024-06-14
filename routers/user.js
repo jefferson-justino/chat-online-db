@@ -25,7 +25,7 @@ rota.post('/', async(req,res)=>{
     const {name,email,password}=req.body
     await user.create({name,email,password})
     res.send('Conta criada!')
-})
+}) 
 
  
 

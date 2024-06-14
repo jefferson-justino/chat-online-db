@@ -24,11 +24,11 @@ const message = (sequelize, DataTypes) =>{
         },
         hour:{
             type: DataTypes.TIME,
-    defaultValue: sequelize.NOw
+    defaultValue: DataTypes.NOW
         },
         date:{
             type: DataTypes.DATEONLY,
-            defaultValue: sequelize.NOW
+            defaultValue: DataTypes.NOW
         }
     },{
         tableName:'message'
