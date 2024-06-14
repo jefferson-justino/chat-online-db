@@ -22,10 +22,14 @@ const message = (sequelize, DataTypes) =>{
                 key:'id'
             }
         },
+        text:{
+            type: DataTypes.STRING(10000),
+            allowNull: false
+        },
         hour:{
             type: DataTypes.TIME,
-    defaultValue: DataTypes.NOW
-        },
+    defaultValue: DataTypes.NOW 
+        }, 
         date:{
             type: DataTypes.DATEONLY,
             defaultValue: DataTypes.NOW

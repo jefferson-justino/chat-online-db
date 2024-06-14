@@ -8,8 +8,12 @@ rota.get('/', async(req,res)=>{
     res.json(messages)
 })
 
-rota.get('/:id', async(req,res)=>{
-    const messages = await message.findByPk(req.params.id)
+rota.get('/:idChat', async(req,res)=>{
+    const messages = await message.findAll({
+        where:{
+            chat_id:req.params.idChat
+        }
+    })
     if(messages){
         res.json(messages)
     }else{
@@ -18,9 +22,9 @@ rota.get('/:id', async(req,res)=>{
 
 })
 rota.post('/', async(req,res)=>{
-    const{chat_id, user_id}= req.body
+    const{chat_id, user_id,text}= req.body
 
-    await message.create({chat_id,user_id})
+    await message.create({chat_id,user_id,text})
     res.send('message was send')
 })
 

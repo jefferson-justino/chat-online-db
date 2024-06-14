@@ -3,6 +3,7 @@ const express = require('express')
 const rota = express.Router()
 
 const{user}= require('../models/index')
+const { password } = require('../configBanco/database')
 
 
 
@@ -27,6 +28,14 @@ rota.post('/', async(req,res)=>{
     res.send('Conta criada!')
 }) 
 
+rota.put('/:id',async(req,res)=>{
+    const {name,email,password}=req.body
+    const users =await user.findByPk(req.params.id)
+
+    await users.update({name,email,password})
+    res.send('update concluído')
+
+})
  
 
 
