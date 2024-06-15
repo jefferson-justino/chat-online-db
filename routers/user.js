@@ -3,7 +3,7 @@ const express = require('express')
 const rota = express.Router()
 
 const{user}= require('../models/index')
-const { password } = require('../configBanco/database')
+
 
 
 
@@ -36,7 +36,11 @@ rota.put('/:id',async(req,res)=>{
     res.send('update concluído')
 
 })
- 
+ rota.delete('/:id', async(req,res)=>{
+    const users = await user.findByPk(req.params.id)
+    await users.destroy()
+    res.send('destruido')
+ })
 
 
 

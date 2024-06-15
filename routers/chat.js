@@ -16,5 +16,14 @@ rota.post('/', async(req,res)=>{
     await chat.create({user1_id,user2_id})
     res.send('roleplay criado amegan')
 })
+rota.delete('/:id', async(req,res)=>{
+    const messages = await chat.destroy({
+        where:{
+            id:req.params.id
+        }
+    })
+    
+    res.send('destruido')
+ })
 
 module.exports=rota
