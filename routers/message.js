@@ -3,6 +3,14 @@ const rota = express.Router()
 
 const{message} = require('../models/index')
 
+// rota para dropar tabela
+rota.get('/droparTabela', async(req,res)=>{
+    await message.drop();
+    res.send(" table dropped!"); 
+    
+    
+})
+
 rota.get('/', async(req,res)=>{
     const messages= await message.findAll()
     res.json(messages)
@@ -36,6 +44,8 @@ rota.delete('/:idChat', async(req,res)=>{
     
     res.send('destruido')
  })
+
+
 
 
 module.exports = rota

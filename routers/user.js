@@ -4,9 +4,14 @@ const rota = express.Router()
 
 const{user}= require('../models/index')
 
-
-
-
+ // rota para dropar tabela
+rota.get('/droparTabela', async(req,res)=>{
+    await user.drop();
+    res.send(" table dropped!"); 
+    
+     
+})
+ 
 
 rota.get('/',async(req,res)=>{
     const users= await user.findAll()
@@ -42,6 +47,6 @@ rota.put('/:id',async(req,res)=>{
     res.send('destruido')
  })
 
-
+ 
 
 module.exports = rota
