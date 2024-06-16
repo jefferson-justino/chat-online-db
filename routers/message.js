@@ -12,8 +12,12 @@ rota.get('/droparTabela', async(req,res)=>{
 })
 
 rota.get('/', async(req,res)=>{
+    
     const messages= await message.findAll()
-    res.json(messages)
+   
+        res.json(messages);
+   
+ 
 })
 
 rota.get('/:idChat', async(req,res)=>{
@@ -22,11 +26,9 @@ rota.get('/:idChat', async(req,res)=>{
             chat_id:req.params.idChat
         }
     })
-    if(messages){ 
+    
         res.json(messages)
-    }else{
-        res.status(400).json( 'Message not found')
-    }
+    
 
 })
 rota.post('/', async(req,res)=>{

@@ -16,11 +16,17 @@ rota.get('/droparTabela', async(req,res)=>{
 
 rota.get('/',async(req,res)=>{
     const chats = await chat.findAll()
-    res.json(chats)
+   
+        res.json(chats)
+   
 })
 rota.get('/:id', async(req,res)=>{
     const chats = await chat.findByPk(req.params.id)
-    res.send(chats)
+    if(chats){
+        res.send(chats)
+    }else{
+        res.status(404).json({ error: 'Chat not found' });
+    }
 })
 rota.post('/', async(req,res)=>{
     const {user1_id,user2_id}=req.body
@@ -28,13 +34,14 @@ rota.post('/', async(req,res)=>{
     res.send('roleplay criado amegan')
 })
 rota.delete('/:id', async(req,res)=>{
-    const messages = await chat.destroy({
-        where:{
-            id:req.params.id
-        }
-    })
+    const chats = await chat.findByPk(req.params.id)
+    if (chats) {
+        await chats.destroy()
+        res.send('destruido')
+    } else {
+        res.status(404).json({ error: 'Chat not found' });
+    }
     
-    res.send('destruido')
  })
 
 

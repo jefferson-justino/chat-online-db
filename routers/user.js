@@ -15,8 +15,11 @@ rota.get('/droparTabela', async(req,res)=>{
 
 rota.get('/',async(req,res)=>{
     const users= await user.findAll()
+   
     res.json(users)
+   
 
+ 
 })
 rota.get('/:id', async(req,res)=>{
     const users = await user.findByPk(req.params.id)
@@ -28,7 +31,7 @@ rota.get('/:id', async(req,res)=>{
 })
 
 rota.post('/', async(req,res)=>{
-    const {name,email,password}=req.body
+    const {name,email,password}=req.body    
     await user.create({name,email,password})
     res.send('Conta criada!')
 }) 
@@ -36,15 +39,24 @@ rota.post('/', async(req,res)=>{
 rota.put('/:id',async(req,res)=>{
     const {name,email,password}=req.body
     const users =await user.findByPk(req.params.id)
-
-    await users.update({name,email,password})
-    res.send('update concluído')
+    if (users) {
+        await users.update({name,email,password})
+        res.send('update concluído')
+    } else {
+        res.status(404).json({ error: 'User not found' });
+    }
+   
 
 })
  rota.delete('/:id', async(req,res)=>{
     const users = await user.findByPk(req.params.id)
-    await users.destroy()
-    res.send('destruido')
+    if (users) {
+        await users.destroy()
+        res.send('destruido')
+    } else {
+        res.status(404).json({ error: 'User not found' });
+    }
+    
  })
 
  
